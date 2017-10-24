@@ -1,5 +1,8 @@
 package rssdom;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -188,28 +191,19 @@ public class RSSDom {
      * }
      * @return The JSON
      */
-    private String generateJSON() {
-        StringBuilder json = new StringBuilder("{\"noticias\":");
+    private String generateJSON() throws JSONException {
+        JSONObject json = new JSONObject();
+        JSONArray noticias = new JSONArray();
 
-        if (newsTitles.size() > 0) {
-            json.append("[");
-            for (int i = 0; i < newsTitles.size() - 1; i++) {
-                String title = newsTitles.get(i);
-                if (title.contains("\"")) {
-                    title = title.replace("\"", "\\\"");
-                }
-                json.append("{\"noticia\": \"").append(title).append("\"},");
-            }
-            String title = newsTitles.get(newsTitles.size() - 1);
-            if (title.contains("\"")) {
-                title = title.replace("\"", "\\\"");
-            }
-            json.append("{\"noticia\": \"").append(title).append("\"}]");
-        } else {
-            json.append("[]");
+        for (String title : newsTitles) {
+            JSONObject noticia = new JSONObject();
+            noticia.put("noticia", title);
+            noticias.put(noticia);
         }
 
-        return json.append("}").toString();
+        json.put("noticias", noticias);
+
+        return json.toString();
     }
 
     /**

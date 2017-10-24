@@ -19,6 +19,9 @@
 .idea/**/gradle.xml
 .idea/**/libraries
 
+# Java libraries
+*.jar
+
 # CMake
 cmake-build-debug/
 
