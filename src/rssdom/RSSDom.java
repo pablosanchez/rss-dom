@@ -210,14 +210,10 @@ public class RSSDom {
      * This method takes a JSON string and writes it to a file
      * @param json The JSON string to write on a file
      */
-    private void writeJSONToFile(String json) {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("noticias_" + channelTitle + ".json"));
-            bw.write(json);
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void writeJSONToFile(String json) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("noticias_" + channelTitle + ".json"));
+        bw.write(json);
+        bw.close();
     }
 
     /**
