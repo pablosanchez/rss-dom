@@ -200,7 +200,11 @@ public class RSSDom {
                 }
                 json.append("{\"noticia\": \"").append(title).append("\"},");
             }
-            json.append("{\"noticia\": \"").append(newsTitles.get(newsTitles.size() - 1)).append("\"}]");
+            String title = newsTitles.get(newsTitles.size() - 1);
+            if (title.contains("\"")) {
+                title = title.replace("\"", "\\\"");
+            }
+            json.append("{\"noticia\": \"").append(title).append("\"}]");
         } else {
             json.append("[]");
         }
